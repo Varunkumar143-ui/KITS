@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slider Value Change</title>
+    <style>
+        body{
+            margin:0px;
+            background-color: #630DD1;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+                $(document).ready(function() {
+                    var slider = document.getElementById('slider');
+                    slider.addEventListener('input', function() {
+                        var value = slider.value;
+                        // Send the value to the server using AJAX
+                        $.ajax({
+                            url: '/slider_callback',
+                    type: 'POST',
+                    data: { value: value },
+                    contentType: 'application/x-www-form-urlencoded',
+                            success: function(response) {
+                                $( "html" ).html(response);
+                    }
+                });
+                    });
+                });
+            
+      
+        </script>
+</head>
+<body>
+    <h1 style="position: absolute;left: 350px;color:white;font-size: 62px;">Kidney Tumor Segmentation</h1>
+    <center>
+        <p style="position: absolute;top:150px;left: 460px;color:white;width: 460px;font-size: 30px;"> 
+        The result image can be download by click the "Download" Button </p>
+    </center>
+    <form method="POST" action="/process" style="position: absolute;top:350px;left: 550px;">
+       
+        <input type="submit" value="Download" style="background: #FF006B;box-shadow: 15px 12px 4px rgba(0, 0, 0, 0.25);border-radius: 33px;width: 351px;
+        height: 70px;">
+    </form>
+   
+   
+    
+</body>
+</html>
